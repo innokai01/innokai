@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Innokai Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: #07111F;
+  color: #F0EEE8;
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(201,168,76,0.04) 60px, rgba(201,168,76,0.04) 61px),
+    repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(201,168,76,0.04) 60px, rgba(201,168,76,0.04) 61px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 4rem;
+  background: rgba(7,17,31,0.96);
+  border-bottom: 1px solid #C9A84C;
+  backdrop-filter: blur(8px);
+}
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: #C9A84C;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: #C9A84C; }
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem 2rem 5rem;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-sunburst {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 800px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg, transparent 11deg, rgba(201,168,76,0.05) 11deg, rgba(201,168,76,0.05) 12deg,
+    transparent 12deg, transparent 26deg, rgba(201,168,76,0.05) 26deg, rgba(201,168,76,0.05) 27deg,
+    transparent 27deg, transparent 41deg, rgba(201,168,76,0.05) 41deg, rgba(201,168,76,0.05) 42deg,
+    transparent 42deg, transparent 56deg, rgba(201,168,76,0.05) 56deg, rgba(201,168,76,0.05) 57deg,
+    transparent 57deg, transparent 71deg, rgba(201,168,76,0.05) 71deg, rgba(201,168,76,0.05) 72deg,
+    transparent 72deg, transparent 86deg, rgba(201,168,76,0.05) 86deg, rgba(201,168,76,0.05) 87deg,
+    transparent 87deg, transparent 101deg, rgba(201,168,76,0.05) 101deg, rgba(201,168,76,0.05) 102deg,
+    transparent 102deg, transparent 116deg, rgba(201,168,76,0.05) 116deg, rgba(201,168,76,0.05) 117deg,
+    transparent 117deg, transparent 131deg, rgba(201,168,76,0.05) 131deg, rgba(201,168,76,0.05) 132deg,
+    transparent 132deg, transparent 146deg, rgba(201,168,76,0.05) 146deg, rgba(201,168,76,0.05) 147deg,
+    transparent 147deg, transparent 161deg, rgba(201,168,76,0.05) 161deg, rgba(201,168,76,0.05) 162deg,
+    transparent 162deg, transparent 176deg, rgba(201,168,76,0.05) 176deg, rgba(201,168,76,0.05) 177deg,
+    transparent 177deg, transparent 360deg
+  );
+  border-radius: 50%;
+  animation: spin 120s linear infinite;
+  pointer-events: none;
+}
+@keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+.hero-ornament {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+.orn-line { height: 1px; width: 60px; background: linear-gradient(to right, transparent, #C9A84C); }
+.orn-line.r { background: linear-gradient(to left, transparent, #C9A84C); }
+.orn-diamond { width: 8px; height: 8px; background: #C9A84C; transform: rotate(45deg); flex-shrink: 0; }
+.orn-text { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.5em; color: #C9A84C; text-transform: uppercase; }
+
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: 0.06em;
+  color: #F0EEE8;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+.hero-title-sub {
+  display: block;
+  font-size: 0.42em;
+  font-weight: 400;
+  letter-spacing: 0.45em;
+  color: #C9A84C;
+  margin-top: 0.7rem;
+}
+.hero-tagline {
+  margin-top: 2.2rem;
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(240,238,232,0.75);
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 1;
+}
+.hero-rule {
+  margin: 2.5rem auto 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+.hero-rule-line { height: 1px; width: 80px; background: rgba(201,168,76,0.5); }
+.hero-rule-gem { color: #C9A84C; font-size: 1.1rem; }
+
+.deco-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  position: relative;
+  z-index: 1;
+}
+.deco-line { height: 1px; width: 120px; background: linear-gradient(to right, transparent, rgba(201,168,76,0.5)); }
+.deco-line.r { background: linear-gradient(to left, transparent, rgba(201,168,76,0.5)); }
+.deco-gems { display: flex; gap: 6px; align-items: center; }
+.gem { width: 5px; height: 5px; background: #C9A84C; transform: rotate(45deg); }
+.gem.lg { width: 9px; height: 9px; }
+
+.services {
+  position: relative;
+  z-index: 1;
+  padding: 5rem 3rem 7rem;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.55em;
+  color: #C9A84C;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+.section-heading {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+}
+.section-underline {
+  margin: 1.2rem auto 0;
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #C9A84C, transparent);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 4rem 3rem 3.5rem;
+  min-height: 520px;
+  background: linear-gradient(145deg, #112248 0%, #0C1A2E 100%);
+  border: 1px solid rgba(201,168,76,0.4);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 30px rgba(201,168,76,0.08);
+  border-color: rgba(201,168,76,0.8);
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #C9A84C, transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.card:hover::before { opacity: 1; }
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 48px; height: 48px;
+  border-bottom: 1px solid rgba(201,168,76,0.35);
+  border-right: 1px solid rgba(201,168,76,0.35);
+}
+
+.card-num {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.4em;
+  color: #C9A84C;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.card-num::after { content: ''; flex: 1; height: 1px; background: rgba(201,168,76,0.25); }
+
+.card-icon {
+  font-size: 3.8rem;
+  color: #C9A84C;
+  opacity: 0.55;
+  display: block;
+  margin-bottom: 2rem;
+  transition: opacity 0.3s;
+}
+.card:hover .card-icon { opacity: 0.85; }
+
+.card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+  line-height: 1.35;
+  margin-bottom: 1.5rem;
+}
+.card-body {
+  font-size: 1.15rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.9;
+  color: rgba(240,238,232,0.68);
+}
+.card-link {
+  margin-top: 2.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  color: #C9A84C;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  transition: gap 0.3s;
+}
+.card:hover .card-link { gap: 1.4rem; }
+.card-link::after { content: '──'; opacity: 0.5; }
+
+.manifesto {
+  position: relative;
+  z-index: 1;
+  padding: 8rem 4rem;
+  text-align: center;
+  border-top: 1px solid rgba(201,168,76,0.3);
+  border-bottom: 1px solid rgba(201,168,76,0.3);
+  background: rgba(11,23,46,0.5);
+}
+.manifesto-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  position: relative;
+}
+.manifesto-inner::before {
+  content: '';
+  position: absolute;
+  top: -2rem; left: -2.5rem;
+  width: 32px; height: 32px;
+  border-top: 1px solid #C9A84C;
+  border-left: 1px solid #C9A84C;
+}
+.manifesto-inner::after {
+  content: '';
+  position: absolute;
+  bottom: -2rem; right: -2.5rem;
+  width: 32px; height: 32px;
+  border-bottom: 1px solid #C9A84C;
+  border-right: 1px solid #C9A84C;
+}
+.manifesto-text {
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #F0EEE8;
+  letter-spacing: 0.02em;
+}
+.manifesto-text em { color: #C9A84C; font-style: normal; font-weight: 400; }
+.manifesto-attr {
+  margin-top: 2.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.45em;
+  color: #C9A84C;
+  text-transform: uppercase;
+}
+
+.cta-section {
+  position: relative;
+  z-index: 1;
+  padding: 8rem 4rem;
+  text-align: center;
+}
+.cta-sub {
+  margin-top: 1.5rem;
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(240,238,232,0.55);
+}
+.cta-btn {
+  display: inline-block;
+  margin-top: 3rem;
+  padding: 1.15rem 3.8rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #07111F;
+  background: #C9A84C;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.35s;
+}
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #0F2040;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s;
+}
+.cta-btn:hover { color: #C9A84C; }
+.cta-btn:hover::before { transform: scaleX(1); }
+.cta-btn span { position: relative; z-index: 1; }
+
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 4rem;
+  border-top: 1px solid rgba(201,168,76,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: #C9A84C;
+  text-transform: uppercase;
+}
+.footer-copy { font-size: 0.78rem; color: rgba(240,238,232,0.3); letter-spacing: 0.1em; }
+
+@media (max-width: 960px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { gap: 1.5rem; }
+  .services { padding: 4rem 1.5rem; }
+  .cards-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+  .manifesto { padding: 5rem 2rem; }
+  .cta-section { padding: 5rem 2rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Innokai</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-sunburst"></div>
+  <div class="hero-ornament">
+    <div class="orn-line"></div>
+    <div class="orn-diamond"></div>
+    <span class="orn-text">Est. Forward Thinking</span>
+    <div class="orn-diamond"></div>
+    <div class="orn-line r"></div>
+  </div>
+  <h1 class="hero-title">
+    Innokai
+    <span class="hero-title-sub">Consulting</span>
+  </h1>
+  <p class="hero-tagline">Where data, democracy &amp; innovation converge</p>
+  <div class="hero-rule">
+    <div class="hero-rule-line"></div>
+    <span class="hero-rule-gem">◆</span>
+    <div class="hero-rule-line"></div>
+  </div>
+</section>
+
+<div class="deco-div">
+  <div class="deco-line"></div>
+  <div class="deco-gems"><div class="gem"></div><div class="gem lg"></div><div class="gem"></div></div>
+  <div class="deco-line r"></div>
+</div>
+
+<section class="services" id="services">
+  <div class="section-header">
+    <span class="section-eyebrow">Areas of Practice</span>
+    <h2 class="section-heading">Our Disciplines</h2>
+    <div class="section-underline"></div>
+  </div>
+  <div class="cards-grid">
+
+    <a href="#" class="card">
+      <div class="card-num">01 &nbsp;/&nbsp; Data</div>
+      <span class="card-icon">◈</span>
+      <h3 class="card-title">Data Governance</h3>
+      <p class="card-body">Architecting frameworks that transform raw information into trusted, strategic assets — with clarity, compliance, and control at every layer of your organisation.</p>
+      <div class="card-link">Explore</div>
+    </a>
+
+    <a href="#" class="card">
+      <div class="card-num">02 &nbsp;/&nbsp; Democracy</div>
+      <span class="card-icon">◉</span>
+      <h3 class="card-title">Democracy &amp; Participatory Innovations</h3>
+      <p class="card-body">Designing deliberative systems that amplify voices, build consensus, and sustain civic engagement — at every scale, from local communities to global institutions.</p>
+      <div class="card-link">Explore</div>
+    </a>
+
+    <a href="#" class="card">
+      <div class="card-num">03 &nbsp;/&nbsp; Innovation</div>
+      <span class="card-icon">◇</span>
+      <h3 class="card-title">Innovation Management</h3>
+      <p class="card-body">Cultivating cultures of invention — structured processes and methodologies that convert emerging ideas into decisive, lasting competitive advantage.</p>
+      <div class="card-link">Explore</div>
+    </a>
+
+  </div>
+</section>
+
+<div class="deco-div">
+  <div class="deco-line"></div>
+  <div class="deco-gems"><div class="gem"></div><div class="gem lg"></div><div class="gem"></div></div>
+  <div class="deco-line r"></div>
+</div>
+
+<section class="manifesto" id="approach">
+  <div class="manifesto-inner">
+    <p class="manifesto-text">
+      We believe the future belongs to organisations that govern their data with <em>integrity</em>,
+      engage their communities with <em>purpose</em>, and pursue innovation with <em>discipline</em>.
+    </p>
+    <div class="manifesto-attr">◆ &nbsp; Innokai Consulting &nbsp; ◆</div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="section-header">
+    <span class="section-eyebrow">Begin the Conversation</span>
+    <h2 class="section-heading">Work With Us</h2>
+    <div class="section-underline"></div>
+  </div>
+  <p class="cta-sub">Strategic counsel for organisations ready to move forward — precisely.</p>
+  <a href="mailto:hello@innokai.com" class="cta-btn"><span>Get in Touch</span></a>
+</section>
+
+<footer>
+  <div class="footer-brand">Innokai Consulting</div>
+  <div class="footer-copy">© 2026 &nbsp;◆&nbsp; Forward Thinking</div>
+</footer>
+
+</body>
+</html>
