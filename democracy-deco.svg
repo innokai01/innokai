@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" width="740" height="740">
+<defs>
+  <radialGradient id="bgG" cx="50%" cy="50%" r="60%">
+    <stop offset="0%" stop-color="#0C1A2E"/>
+    <stop offset="100%" stop-color="#07111F"/>
+  </radialGradient>
+  <radialGradient id="innG" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#112040"/>
+    <stop offset="100%" stop-color="#07111F"/>
+  </radialGradient>
+  <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur stdDeviation="3" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse" patternTransform="rotate(45 350 350)">
+    <line x1="0" y1="0" x2="0" y2="44" stroke="rgba(201,168,76,0.07)" stroke-width="0.8"/>
+  </pattern>
+  <path id="seg0" d="M 179.12,243.22 A 201.5,201.5 0 0,0 186.98,468.44" fill="none"/>
+  <path id="seg1" d="M 186.98,231.56 A 201.5,201.5 0 0,1 398.75,154.49" fill="none"/>
+  <path id="seg2" d="M 412.27,158.36 A 201.5,201.5 0 0,1 551.01,335.94" fill="none"/>
+  <path id="seg3" d="M 425.48,536.83 A 201.5,201.5 0 0,0 551.50,350.00" fill="none"/>
+  <path id="seg4" d="M 195.64,479.52 A 201.5,201.5 0 0,0 412.27,541.64" fill="none"/>
+</defs>
+
+<rect width="700" height="700" fill="url(#bgG)"/>
+<rect width="700" height="700" fill="url(#grid)"/>
+<path d="M 151.79,494.01 A 245,245 0 0,1 142.23,220.17 L 216.01,266.27 A 158,158 0 0,0 222.18,442.87 Z" fill="#1A5068" stroke="#C9A84C" stroke-width="1.2" opacity="0.95"/>
+<path d="M 151.79,205.99 A 245,245 0 0,1 409.27,112.28 L 388.22,196.69 A 158,158 0 0,0 222.18,257.13 Z" fill="#0F3A50" stroke="#C9A84C" stroke-width="1.2" opacity="0.95"/>
+<path d="M 425.71,116.99 A 245,245 0 0,1 594.40,332.91 L 507.62,338.98 A 158,158 0 0,0 398.82,199.73 Z" fill="#1A5068" stroke="#C9A84C" stroke-width="1.2" opacity="0.95"/>
+<path d="M 595.00,350.00 A 245,245 0 0,1 441.78,577.16 L 409.19,496.50 A 158,158 0 0,0 508.00,350.00 Z" fill="#0F3A50" stroke="#C9A84C" stroke-width="1.2" opacity="0.95"/>
+<path d="M 425.71,583.01 A 245,245 0 0,1 162.32,507.48 L 228.96,451.56 A 158,158 0 0,0 398.82,500.27 Z" fill="#1A5068" stroke="#C9A84C" stroke-width="1.2" opacity="0.95"/>
+<circle cx="350" cy="350" r="245" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.45"/>
+<circle cx="350" cy="350" r="158" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.55"/>
+<circle cx="350" cy="350" r="162" fill="none" stroke="#C9A84C" stroke-width="18" opacity="0.05" filter="url(#glow)"/>
+<circle cx="350" cy="350" r="148" fill="url(#innG)"/>
+<circle cx="350" cy="350" r="148" fill="none" stroke="#C9A84C" stroke-width="2" opacity="0.85"/>
+<circle cx="350" cy="350" r="137" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.28"/>
+<circle cx="350" cy="350" r="124" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.13"/>
+<line x1="451.1" y1="248.9" x2="441.9" y2="258.1" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>
+<line x1="451.1" y1="451.1" x2="441.9" y2="441.9" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>
+<line x1="248.9" y1="451.1" x2="258.1" y2="441.9" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>
+<line x1="248.9" y1="248.9" x2="258.1" y2="258.1" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>
+<text x="350" y="324" text-anchor="middle" font-family="Cinzel,Georgia,serif" font-size="26" font-weight="700" fill="#F0EEE8" letter-spacing="1">Democracy</text>
+<text x="350" y="358" text-anchor="middle" font-family="Cinzel,Georgia,serif" font-size="26" font-weight="700" fill="#F0EEE8" letter-spacing="1">by Data</text>
+<line x1="292" y1="370" x2="408" y2="370" stroke="#C9A84C" stroke-width="1" opacity="0.45"/>
+<text x="350" y="388" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#C9A84C" opacity="0.7" font-style="italic">People ↔ Data ↔ Policy loop</text>
+<polygon points="350,396 353,400 350,404 347,400" fill="#C9A84C" opacity="0.65"/>
+<polygon points="200.3,215.2 184.3,258.1 163.3,246.5" fill="#C9A84C" filter="url(#glow)"/>
+<polygon points="432.0,165.9 386.2,164.0 390.7,140.4" fill="#C9A84C" filter="url(#glow)"/>
+<polygon points="550.4,371.1 538.1,326.9 561.9,324.0" fill="#C9A84C" filter="url(#glow)"/>
+<polygon points="391.9,547.1 430.1,521.7 440.2,543.5" fill="#C9A84C" filter="url(#glow)"/>
+<polygon points="175.5,450.8 211.4,479.2 193.9,495.6" fill="#C9A84C" filter="url(#glow)"/>
+<text font-family="Cinzel,Georgia,serif" font-size="13" font-weight="700" fill="#C9A84C" letter-spacing="1.5"><textPath href="#seg0" startOffset="50%" text-anchor="middle">Monitor</textPath></text>
+<text font-family="Cinzel,Georgia,serif" font-size="13" font-weight="700" fill="#C9A84C" letter-spacing="1.5"><textPath href="#seg1" startOffset="50%" text-anchor="middle">Collect</textPath></text>
+<text font-family="Cinzel,Georgia,serif" font-size="13" font-weight="700" fill="#C9A84C" letter-spacing="1.5"><textPath href="#seg2" startOffset="50%" text-anchor="middle">Open &amp; Share</textPath></text>
+<text font-family="Cinzel,Georgia,serif" font-size="13" font-weight="700" fill="#C9A84C" letter-spacing="1.5"><textPath href="#seg3" startOffset="50%" text-anchor="middle">Deliberate</textPath></text>
+<text font-family="Cinzel,Georgia,serif" font-size="13" font-weight="700" fill="#C9A84C" letter-spacing="1.5"><textPath href="#seg4" startOffset="50%" text-anchor="middle">Decide</textPath></text>
+<line x1="262.8" y1="110.4" x2="253.9" y2="85.9" stroke="#C9A84C" stroke-width="0.8" opacity="0.35"/>
+<text x="247.7" y="69.0" text-anchor="middle" dominant-baseline="middle" font-family="Cinzel,Georgia,serif" font-size="10.5" fill="rgba(201,168,76,0.7)" font-style="italic" letter-spacing="1.5">Transparency</text>
+<line x1="550.9" y1="193.0" x2="571.4" y2="177.0" stroke="#C9A84C" stroke-width="0.8" opacity="0.35"/>
+<text x="585.6" y="165.9" text-anchor="middle" dominant-baseline="middle" font-family="Cinzel,Georgia,serif" font-size="10.5" fill="rgba(201,168,76,0.7)" font-style="italic" letter-spacing="1.5">Privacy &amp; Security</text>
+<line x1="561.4" y1="492.6" x2="583.0" y2="507.1" stroke="#C9A84C" stroke-width="0.8" opacity="0.35"/>
+<text x="597.9" y="517.2" text-anchor="middle" dominant-baseline="middle" font-family="Cinzel,Georgia,serif" font-size="10.5" fill="rgba(201,168,76,0.7)" font-style="italic" letter-spacing="1.5">Equity &amp; Inclusion</text>
+<line x1="279.7" y1="595.1" x2="272.5" y2="620.1" stroke="#C9A84C" stroke-width="0.8" opacity="0.35"/>
+<text x="267.6" y="637.4" text-anchor="middle" dominant-baseline="middle" font-family="Cinzel,Georgia,serif" font-size="10.5" fill="rgba(201,168,76,0.7)" font-style="italic" letter-spacing="1.5">Accountability</text>
+<polygon points="350.0,197.0 355.0,202.0 350.0,207.0 345.0,202.0" fill="#C9A84C" filter="url(#glow)"/>
+<polygon points="498.0,345.0 503.0,350.0 498.0,355.0 493.0,350.0" fill="#C9A84C" filter="url(#glow)"/>
+<polygon points="350.0,493.0 355.0,498.0 350.0,503.0 345.0,498.0" fill="#C9A84C" filter="url(#glow)"/>
+<polygon points="202.0,345.0 207.0,350.0 202.0,355.0 197.0,350.0" fill="#C9A84C" filter="url(#glow)"/>
+<text x="350" y="680" text-anchor="middle" font-family="Cinzel,Georgia,serif" font-size="9.5" fill="rgba(201,168,76,0.45)" letter-spacing="2">OUTCOMES: Better Policy  ◆  Public Trust  ◆  Continuous Learning</text>
+</svg>
