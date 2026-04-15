@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Governance — Innokai Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: #07111F;
+  color: #F0EEE8;
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(201,168,76,0.04) 60px, rgba(201,168,76,0.04) 61px),
+    repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(201,168,76,0.04) 60px, rgba(201,168,76,0.04) 61px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 4rem;
+  background: rgba(7,17,31,0.96);
+  border-bottom: 1px solid #C9A84C;
+  backdrop-filter: blur(8px);
+}
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: #C9A84C;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.nav-back {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+  text-decoration: none;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-back:hover { color: #C9A84C; }
+
+.page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 2rem 5rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.page-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.55em;
+  color: #C9A84C;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+.page-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+}
+.page-rule {
+  margin: 1.2rem auto 0;
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #C9A84C, transparent);
+}
+
+/* ── DIAGRAM ── */
+.diagram-wrap {
+  position: relative;
+  width: 560px;
+  height: 560px;
+}
+
+svg.diagram {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ── DESCRIPTION BELOW ── */
+.pillars {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 4rem;
+  max-width: 860px;
+}
+.pillar {
+  flex: 1;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: linear-gradient(145deg, #112248 0%, #0C1A2E 100%);
+  position: relative;
+}
+.pillar::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 24px; height: 24px;
+  border-bottom: 1px solid rgba(201,168,76,0.4);
+  border-right: 1px solid rgba(201,168,76,0.4);
+}
+.pillar-icon {
+  font-size: 1.8rem;
+  color: #C9A84C;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+.pillar-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  margin-bottom: 0.6rem;
+}
+.pillar-text {
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(240,238,232,0.65);
+  line-height: 1.6;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 4rem;
+  border-top: 1px solid rgba(201,168,76,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5rem;
+}
+.footer-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: #C9A84C;
+  text-transform: uppercase;
+}
+.footer-copy { font-size: 0.78rem; color: rgba(240,238,232,0.3); letter-spacing: 0.1em; }
+
+@media (max-width: 640px) {
+  nav { padding: 1rem 1.5rem; }
+  .diagram-wrap { width: 340px; height: 340px; }
+  .pillars { flex-direction: column; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+  .dama-areas { grid-template-columns: 1fr; }
+}
+
+/* ── DAMA SECTION ── */
+.dama-section {
+  max-width: 860px;
+  width: 100%;
+  margin-top: 5rem;
+  padding-top: 4rem;
+  border-top: 1px solid rgba(201,168,76,0.3);
+}
+.dama-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.dama-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+  margin-top: 0.5rem;
+}
+.dama-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.dama-text {
+  font-size: 1.15rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(240,238,232,0.78);
+  letter-spacing: 0.02em;
+}
+.dama-text em {
+  color: #C9A84C;
+  font-style: normal;
+  font-weight: 400;
+}
+.dama-areas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+}
+.dama-area {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid rgba(201,168,76,0.2);
+  background: rgba(17,34,72,0.4);
+  transition: border-color 0.3s, background 0.3s;
+}
+.dama-area:hover {
+  border-color: rgba(201,168,76,0.6);
+  background: rgba(17,34,72,0.7);
+}
+.area-num {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: #C9A84C;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+.area-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Innokai</a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <span class="page-eyebrow">Areas of Practice — 01</span>
+    <h1 class="page-title">Data Governance</h1>
+    <div class="page-rule"></div>
+  </div>
+
+  <div class="diagram-wrap">
+    <svg class="diagram" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Gold gradient -->
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#E8C97A"/>
+          <stop offset="100%" style="stop-color:#C9A84C"/>
+        </linearGradient>
+        <!-- Segment gradients -->
+        <linearGradient id="segTop" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#1A3A6B"/>
+          <stop offset="100%" style="stop-color:#1E4580"/>
+        </linearGradient>
+        <linearGradient id="segRight" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#1A3A6B"/>
+          <stop offset="100%" style="stop-color:#1E4580"/>
+        </linearGradient>
+        <linearGradient id="segBottom" x1="100%" y1="0%" x2="0%" y2="0%">
+          <stop offset="0%" style="stop-color:#1A3A6B"/>
+          <stop offset="100%" style="stop-color:#1E4580"/>
+        </linearGradient>
+        <linearGradient id="segLeft" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" style="stop-color:#1A3A6B"/>
+          <stop offset="100%" style="stop-color:#1E4580"/>
+        </linearGradient>
+        <!-- Glow filter -->
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <!-- Inner ring gradient -->
+        <linearGradient id="innerRing" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#0F2040"/>
+          <stop offset="100%" style="stop-color:#07111F"/>
+        </linearGradient>
+
+        <!-- Arrow marker gold -->
+        <marker id="arrowGold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#C9A84C"/>
+        </marker>
+      </defs>
+
+      <!-- ═══════════════════════════════ -->
+      <!-- OUTER ARROW SEGMENTS (4 arrows) -->
+      <!-- ═══════════════════════════════ -->
+      <!-- Each arrow is a rounded "chevron" shape placed at N/E/S/W -->
+
+      <!-- TOP arrow — ACCESS (pointing right/clockwise) -->
+      <g transform="translate(280,280)">
+        <!-- Arrow body: top position, rotated 0deg -->
+        <g transform="rotate(-45)">
+          <path d="M-100,-190 L100,-190 L120,-155 L0,-130 L-120,-155 Z"
+                fill="url(#segTop)" stroke="#C9A84C" stroke-width="1.5" opacity="0.95"/>
+          <!-- Arrow tip triangle -->
+          <path d="M100,-190 L140,-170 L120,-155 Z" fill="#C9A84C" opacity="0.9"/>
+        </g>
+        <text transform="rotate(-45) translate(0,-167)" text-anchor="middle"
+              font-family="Cinzel, serif" font-size="15" font-weight="700"
+              fill="#C9A84C" letter-spacing="3">ACCESS</text>
+      </g>
+
+      <!-- RIGHT arrow — SHARE -->
+      <g transform="translate(280,280)">
+        <g transform="rotate(45)">
+          <path d="M-100,-190 L100,-190 L120,-155 L0,-130 L-120,-155 Z"
+                fill="url(#segRight)" stroke="#C9A84C" stroke-width="1.5" opacity="0.95"/>
+          <path d="M100,-190 L140,-170 L120,-155 Z" fill="#C9A84C" opacity="0.9"/>
+        </g>
+        <text transform="rotate(45) translate(0,-167)" text-anchor="middle"
+              font-family="Cinzel, serif" font-size="15" font-weight="700"
+              fill="#C9A84C" letter-spacing="3">SHARE</text>
+      </g>
+
+      <!-- BOTTOM arrow — USE -->
+      <g transform="translate(280,280)">
+        <g transform="rotate(135)">
+          <path d="M-100,-190 L100,-190 L120,-155 L0,-130 L-120,-155 Z"
+                fill="url(#segBottom)" stroke="#C9A84C" stroke-width="1.5" opacity="0.95"/>
+          <path d="M100,-190 L140,-170 L120,-155 Z" fill="#C9A84C" opacity="0.9"/>
+        </g>
+        <text transform="rotate(135) translate(0,-167)" text-anchor="middle"
+              font-family="Cinzel, serif" font-size="15" font-weight="700"
+              fill="#C9A84C" letter-spacing="3">USE</text>
+      </g>
+
+      <!-- LEFT arrow — COLLECT -->
+      <g transform="translate(280,280)">
+        <g transform="rotate(225)">
+          <path d="M-100,-190 L100,-190 L120,-155 L0,-130 L-120,-155 Z"
+                fill="url(#segLeft)" stroke="#C9A84C" stroke-width="1.5" opacity="0.95"/>
+          <path d="M100,-190 L140,-170 L120,-155 Z" fill="#C9A84C" opacity="0.9"/>
+        </g>
+        <text transform="rotate(225) translate(0,-167)" text-anchor="middle"
+              font-family="Cinzel, serif" font-size="15" font-weight="700"
+              fill="#C9A84C" letter-spacing="3">COLLECT</text>
+      </g>
+
+      <!-- ═══════════════════════════ -->
+      <!-- MIDDLE RING — rotating cycle arrows -->
+      <!-- ═══════════════════════════ -->
+
+      <!-- Ring track -->
+      <circle cx="280" cy="280" r="118" fill="none" stroke="rgba(201,168,76,0.15)" stroke-width="28"/>
+
+      <!-- Arc segments for Technology / People / Process -->
+      <!-- Technology arc: top-left ~300deg to ~60deg -->
+      <path d="M280,280 m0,-118 a118,118 0 0,1 102.1,-59.1" fill="none"
+            stroke="#2A6B4A" stroke-width="26" stroke-linecap="butt" opacity="0.85"/>
+      <!-- Extending arc -->
+      <path d="M 382.1,220.9 A 118,118 0 0,1 382.1,339.1" fill="none"
+            stroke="#2A6B4A" stroke-width="26" stroke-linecap="butt" opacity="0.85"/>
+
+      <!-- People arc -->
+      <path d="M 382.1,339.1 A 118,118 0 0,1 177.9,339.1" fill="none"
+            stroke="#1A4A5A" stroke-width="26" stroke-linecap="butt" opacity="0.85"/>
+
+      <!-- Process arc -->
+      <path d="M 177.9,339.1 A 118,118 0 0,1 177.9,220.9" fill="none"
+            stroke="#4A7A3A" stroke-width="26" stroke-linecap="butt" opacity="0.85"/>
+      <path d="M 177.9,220.9 A 118,118 0 0,1 280,162" fill="none"
+            stroke="#4A7A3A" stroke-width="26" stroke-linecap="butt" opacity="0.85"/>
+
+      <!-- Ring border lines -->
+      <circle cx="280" cy="280" r="104" fill="none" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
+      <circle cx="280" cy="280" r="132" fill="none" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
+
+      <!-- Arc arrow heads (gold triangles at arc ends) -->
+      <!-- Arrow on Technology arc (pointing clockwise at ~60deg) -->
+      <polygon points="0,-6 6,6 -6,6"
+               transform="translate(280,280) rotate(60) translate(0,-118) rotate(90)"
+               fill="#C9A84C" filter="url(#glow)"/>
+      <!-- Arrow on People arc -->
+      <polygon points="0,-6 6,6 -6,6"
+               transform="translate(280,280) rotate(180) translate(0,-118) rotate(90)"
+               fill="#C9A84C" filter="url(#glow)"/>
+      <!-- Arrow on Process arc -->
+      <polygon points="0,-6 6,6 -6,6"
+               transform="translate(280,280) rotate(300) translate(0,-118) rotate(90)"
+               fill="#C9A84C" filter="url(#glow)"/>
+
+      <!-- Arc labels -->
+      <!-- Technology label (top-right arc) -->
+      <text font-family="Cinzel, serif" font-size="11" font-weight="700"
+            fill="#A8D8B0" letter-spacing="2" text-anchor="middle">
+        <textPath href="#techArc" startOffset="50%">TECHNOLOGY</textPath>
+      </text>
+      <path id="techArc" d="M 340,175 A 118,118 0 0,1 398,280" fill="none"/>
+
+      <!-- People label (right arc) -->
+      <text font-family="Cinzel, serif" font-size="11" font-weight="700"
+            fill="#88C8D8" letter-spacing="2" text-anchor="middle">
+        <textPath href="#peopleArc" startOffset="50%">PEOPLE</textPath>
+      </text>
+      <path id="peopleArc" d="M 398,310 A 118,118 0 0,1 220,388" fill="none"/>
+
+      <!-- Process label (bottom-left arc) -->
+      <text font-family="Cinzel, serif" font-size="11" font-weight="700"
+            fill="#A8D888" letter-spacing="2" text-anchor="middle">
+        <textPath href="#processArc" startOffset="50%">PROCESS</textPath>
+      </text>
+      <path id="processArc" d="M 162,310 A 118,118 0 0,1 240,165" fill="none"/>
+
+      <!-- ═══════════════════════════ -->
+      <!-- INNER CIRCLE — Data Governance -->
+      <!-- ═══════════════════════════ -->
+
+      <!-- Outer glow ring -->
+      <circle cx="280" cy="280" r="96" fill="none"
+              stroke="rgba(201,168,76,0.2)" stroke-width="8" filter="url(#glow)"/>
+
+      <!-- Inner fill -->
+      <circle cx="280" cy="280" r="92" fill="url(#innerRing)"/>
+
+      <!-- Decorative inner rings -->
+      <circle cx="280" cy="280" r="92" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+      <circle cx="280" cy="280" r="84" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="0.75"/>
+      <circle cx="280" cy="280" r="76" fill="none" stroke="rgba(201,168,76,0.15)" stroke-width="0.5"/>
+
+      <!-- Deco cross lines inside -->
+      <line x1="280" y1="196" x2="280" y2="210" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+      <line x1="280" y1="350" x2="280" y2="364" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+      <line x1="196" y1="280" x2="210" y2="280" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+      <line x1="350" y1="280" x2="364" y2="280" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+
+      <!-- Corner diamonds at cardinal points on inner circle -->
+      <rect x="277" y="188" width="6" height="6" fill="#C9A84C" transform="rotate(45 280 191)"/>
+      <rect x="277" y="365" width="6" height="6" fill="#C9A84C" transform="rotate(45 280 368)"/>
+      <rect x="188" y="277" width="6" height="6" fill="#C9A84C" transform="rotate(45 191 280)"/>
+      <rect x="365" y="277" width="6" height="6" fill="#C9A84C" transform="rotate(45 368 280)"/>
+
+      <!-- Center text -->
+      <text x="280" y="268" text-anchor="middle"
+            font-family="Cinzel, serif" font-size="13" font-weight="400"
+            fill="rgba(201,168,76,0.6)" letter-spacing="2">DATA</text>
+      <text x="280" y="288" text-anchor="middle"
+            font-family="Cinzel, serif" font-size="22" font-weight="700"
+            fill="#F0EEE8" letter-spacing="1">Governance</text>
+      <!-- Decorative rule under text -->
+      <line x1="240" y1="297" x2="320" y2="297" stroke="rgba(201,168,76,0.5)" stroke-width="0.75"/>
+      <rect x="278" y="302" width="4" height="4" fill="#C9A84C" transform="rotate(45 280 304)"/>
+
+    </svg>
+  </div>
+
+  <!-- DAMA Section -->
+  <div class="dama-section">
+    <div class="dama-header">
+      <span class="page-eyebrow">Framework</span>
+      <h2 class="dama-title">About DAMA International</h2>
+      <div class="page-rule"></div>
+    </div>
+    <div class="dama-body">
+      <p class="dama-text">
+        <em>DAMA International</em> — the Data Management Association — is the global professional organisation dedicated to advancing the concepts and practices of information and data management. Founded in 1988, DAMA provides practitioners, leaders, and organisations with the standards, frameworks, and community needed to govern data as a strategic enterprise asset.
+      </p>
+      <p class="dama-text">
+        At the heart of DAMA's contribution is the <em>DAMA-DMBOK</em> (Data Management Body of Knowledge) — a globally recognised framework that defines eleven interconnected knowledge areas, with <em>Data Governance</em> at its centre. These areas span the full data lifecycle: from architecture and modelling to quality, security, warehousing, and metadata management.
+      </p>
+      <p class="dama-text">
+        The DMBOK framework provides organisations with a common vocabulary and structured approach to managing data across people, processes, and technology — enabling accountability, compliance, and competitive advantage at every level.
+      </p>
+    </div>
+    <div class="dama-areas">
+      <div class="dama-area"><span class="area-num">01</span><span class="area-name">Data Governance</span></div>
+      <div class="dama-area"><span class="area-num">02</span><span class="area-name">Data Architecture</span></div>
+      <div class="dama-area"><span class="area-num">03</span><span class="area-name">Data Modelling & Design</span></div>
+      <div class="dama-area"><span class="area-num">04</span><span class="area-name">Data Storage & Operations</span></div>
+      <div class="dama-area"><span class="area-num">05</span><span class="area-name">Data Security</span></div>
+      <div class="dama-area"><span class="area-num">06</span><span class="area-name">Data Integration & Interoperability</span></div>
+      <div class="dama-area"><span class="area-num">07</span><span class="area-name">Documents & Content</span></div>
+      <div class="dama-area"><span class="area-num">08</span><span class="area-name">Reference & Master Data</span></div>
+      <div class="dama-area"><span class="area-num">09</span><span class="area-name">Data Warehousing & Business Intelligence</span></div>
+      <div class="dama-area"><span class="area-num">10</span><span class="area-name">Metadata Management</span></div>
+      <div class="dama-area"><span class="area-num">11</span><span class="area-name">Data Quality</span></div>
+    </div>
+  </div>
+
+  <!-- Pillar descriptions -->
+  <div class="pillars">
+    <div class="pillar">
+      <span class="pillar-icon">◈</span>
+      <div class="pillar-title">Technology</div>
+      <p class="pillar-text">The systems and tools that enable data to be captured, stored, and activated with precision.</p>
+    </div>
+    <div class="pillar">
+      <span class="pillar-icon">◉</span>
+      <div class="pillar-title">People</div>
+      <p class="pillar-text">The stewards, owners, and custodians who define accountability across the data lifecycle.</p>
+    </div>
+    <div class="pillar">
+      <span class="pillar-icon">◇</span>
+      <div class="pillar-title">Process</div>
+      <p class="pillar-text">The policies and workflows that ensure data is governed consistently, reliably, and with integrity.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Innokai Consulting</div>
+  <div class="footer-copy">© 2026 &nbsp;◆&nbsp; Forward Thinking</div>
+</footer>
+
+</body>
+</html>
