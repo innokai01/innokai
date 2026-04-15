@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Innovation Management — Innokai Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: #07111F;
+  color: #F0EEE8;
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(201,168,76,0.04) 60px, rgba(201,168,76,0.04) 61px),
+    repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(201,168,76,0.04) 60px, rgba(201,168,76,0.04) 61px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 4rem;
+  background: rgba(7,17,31,0.96);
+  border-bottom: 1px solid #C9A84C;
+  backdrop-filter: blur(8px);
+}
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: #C9A84C;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.nav-back {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+  text-decoration: none;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-back:hover { color: #C9A84C; }
+
+.page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 2rem 5rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.page-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.55em;
+  color: #C9A84C;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+.page-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+}
+.page-rule {
+  margin: 1.2rem auto 0;
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #C9A84C, transparent);
+}
+
+/* ── DIAGRAM ── */
+.diagram-wrap {
+  position: relative;
+  width: 640px;
+  height: 660px;
+}
+.diagram-img {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── CONTENT SECTION ── */
+.content-section {
+  max-width: 860px;
+  width: 100%;
+  margin-top: 5rem;
+  padding-top: 4rem;
+  border-top: 1px solid rgba(201,168,76,0.3);
+}
+.content-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.content-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+  margin-top: 0.5rem;
+}
+.content-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.content-text {
+  font-size: 1.15rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(240,238,232,0.78);
+  letter-spacing: 0.02em;
+}
+.content-text em {
+  color: #C9A84C;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* ── INNOCM PHASES ── */
+.phases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+.phase {
+  padding: 2rem 1.5rem;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: linear-gradient(145deg, #112248 0%, #0C1A2E 100%);
+  position: relative;
+  text-align: center;
+}
+.phase::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 24px; height: 24px;
+  border-bottom: 1px solid rgba(201,168,76,0.4);
+  border-right: 1px solid rgba(201,168,76,0.4);
+}
+.phase-num {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  color: #C9A84C;
+  opacity: 0.7;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+.phase-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+  margin-bottom: 1rem;
+}
+.phase-text {
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(240,238,232,0.65);
+  line-height: 1.7;
+}
+
+/* ── QUOTE BLOCK ── */
+.quote-block {
+  margin: 3rem 0;
+  padding: 2.5rem 3rem;
+  border-left: 2px solid #C9A84C;
+  background: rgba(17,34,72,0.4);
+  position: relative;
+}
+.quote-block::before {
+  content: '◆';
+  position: absolute;
+  top: -0.6rem;
+  left: -0.55rem;
+  color: #C9A84C;
+  font-size: 0.7rem;
+  background: #07111F;
+  padding: 0 0.2rem;
+}
+.quote-text {
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #F0EEE8;
+  letter-spacing: 0.02em;
+}
+.quote-text em {
+  color: #C9A84C;
+  font-style: normal;
+}
+.quote-attr {
+  margin-top: 1rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  color: rgba(201,168,76,0.6);
+  text-transform: uppercase;
+}
+
+/* ── INNOCM AREAS ── */
+.areas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+.area {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid rgba(201,168,76,0.2);
+  background: rgba(17,34,72,0.4);
+  transition: border-color 0.3s, background 0.3s;
+}
+.area:hover {
+  border-color: rgba(201,168,76,0.6);
+  background: rgba(17,34,72,0.7);
+}
+.area-num {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: #C9A84C;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+.area-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 4rem;
+  border-top: 1px solid rgba(201,168,76,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5rem;
+}
+.footer-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: #C9A84C;
+  text-transform: uppercase;
+}
+.footer-copy { font-size: 0.78rem; color: rgba(240,238,232,0.3); letter-spacing: 0.1em; }
+
+@media (max-width: 640px) {
+  nav { padding: 1rem 1.5rem; }
+  .diagram-wrap { width: 340px; height: 350px; }
+  .phases { grid-template-columns: 1fr; }
+  .areas { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+  .quote-block { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Innokai</a>
+  <a href="index.html#services" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <span class="page-eyebrow">Areas of Practice — 03</span>
+    <h1 class="page-title">Innovation Management</h1>
+    <div class="page-rule"></div>
+  </div>
+
+  <div class="diagram-wrap">
+    <img src="planning-strategy-deco.svg" alt="Innovation Management Diagram" class="diagram-img"/>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content-section">
+    <div class="content-header">
+      <span class="page-eyebrow">Framework</span>
+      <h2 class="content-title">INNOCM — Innovation Capability &amp; Maturity</h2>
+      <div class="page-rule"></div>
+    </div>
+    <div class="content-body">
+      <p class="content-text">
+        <em>INNOCM</em> — the Innovation Capability Maturity framework — provides organisations with a structured, evidence-based method for diagnosing, developing, and sustaining their capacity to innovate. Where most organisations treat innovation as an event, INNOCM treats it as a <em>discipline</em>: one that can be measured, improved, and embedded across every level of an enterprise.
+      </p>
+      <p class="content-text">
+        The framework maps an organisation's innovation capabilities across five maturity levels — from ad hoc and reactive, through to <em>optimised and continuously improving</em>. At each level, INNOCM identifies the specific competencies in leadership, culture, processes, and resources that must be developed to advance, providing a clear and actionable roadmap for transformation.
+      </p>
+
+      <div class="quote-block">
+        <p class="quote-text">"Innovation without discipline is just <em>luck</em>. INNOCM turns the unpredictable into the systematic — and the systematic into the exceptional."</p>
+        <p class="quote-attr">◆ &nbsp; Innokai Consulting</p>
+      </div>
+
+      <p class="content-text">
+        Aligned with <em>ISO 56002</em> — the international standard for Innovation Management Systems — INNOCM operationalises the standard's principles into a practical, three-phase cycle of <em>Exploring &amp; Defining</em>, <em>Analyzing &amp; Enhancing</em>, and <em>Exploiting &amp; Assessing</em>. This cycle is not linear but iterative, feeding continual learning back into organisational strategy.
+      </p>
+      <p class="content-text">
+        Innokai applies INNOCM through structured assessments, facilitated workshops, and bespoke capability-building programmes. Our interventions are tailored to the organisation's current maturity level, sector context, and strategic ambitions — ensuring that every step forward is grounded in where the organisation genuinely stands today.
+      </p>
+    </div>
+
+    <!-- Three Phases -->
+    <div class="phases">
+      <div class="phase">
+        <span class="phase-num">Phase 01</span>
+        <div class="phase-title">Exploring &amp; Defining</div>
+        <p class="phase-text">Scanning the environment, identifying opportunities, and framing the innovation challenge with precision and strategic intent.</p>
+      </div>
+      <div class="phase">
+        <span class="phase-num">Phase 02</span>
+        <div class="phase-title">Analyzing &amp; Enhancing</div>
+        <p class="phase-text">Evaluating capability gaps, validating concepts, and iteratively refining solutions against real organisational and market constraints.</p>
+      </div>
+      <div class="phase">
+        <span class="phase-num">Phase 03</span>
+        <div class="phase-title">Exploiting &amp; Assessing</div>
+        <p class="phase-text">Scaling proven innovations, measuring impact against defined outcomes, and feeding learning back into the next cycle.</p>
+      </div>
+    </div>
+
+    <!-- INNOCM Capability Domains -->
+    <div class="content-header" style="margin-top: 3rem;">
+      <span class="page-eyebrow">Capability Domains</span>
+      <h2 class="content-title">INNOCM Assessment Areas</h2>
+      <div class="page-rule"></div>
+    </div>
+    <div class="areas">
+      <div class="area"><span class="area-num">01</span><span class="area-name">Innovation Leadership</span></div>
+      <div class="area"><span class="area-num">02</span><span class="area-name">Strategy &amp; Portfolio</span></div>
+      <div class="area"><span class="area-num">03</span><span class="area-name">Culture &amp; Climate</span></div>
+      <div class="area"><span class="area-num">04</span><span class="area-name">People &amp; Competencies</span></div>
+      <div class="area"><span class="area-num">05</span><span class="area-name">Processes &amp; Methods</span></div>
+      <div class="area"><span class="area-num">06</span><span class="area-name">Collaboration &amp; Partnerships</span></div>
+      <div class="area"><span class="area-num">07</span><span class="area-name">Technology &amp; Infrastructure</span></div>
+      <div class="area"><span class="area-num">08</span><span class="area-name">Measurement &amp; Learning</span></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Innokai Consulting</div>
+  <div class="footer-copy">© 2026 &nbsp;◆&nbsp; Forward Thinking</div>
+</footer>
+
+</body>
+</html>

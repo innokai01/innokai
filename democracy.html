@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Data Governance — Innokai Consulting</title>
+<title>Democracy & Participatory Innovation — Innokai Consulting</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -103,16 +103,94 @@ nav {
 /* ── DIAGRAM ── */
 .diagram-wrap {
   position: relative;
-  width: 600px;
-  height: 600px;
+  width: 620px;
+  height: 620px;
 }
-
 .diagram-img {
   width: 100%;
   height: 100%;
 }
 
-/* ── DESCRIPTION BELOW ── */
+/* ── CONTENT SECTION ── */
+.content-section {
+  max-width: 860px;
+  width: 100%;
+  margin-top: 5rem;
+  padding-top: 4rem;
+  border-top: 1px solid rgba(201,168,76,0.3);
+}
+.content-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.content-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+  margin-top: 0.5rem;
+}
+.content-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.content-text {
+  font-size: 1.15rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(240,238,232,0.78);
+  letter-spacing: 0.02em;
+}
+.content-text em {
+  color: #C9A84C;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* ── QUOTE BLOCK ── */
+.quote-block {
+  margin: 3rem 0;
+  padding: 2.5rem 3rem;
+  border-left: 2px solid #C9A84C;
+  background: rgba(17,34,72,0.4);
+  position: relative;
+}
+.quote-block::before {
+  content: '◆';
+  position: absolute;
+  top: -0.6rem;
+  left: -0.55rem;
+  color: #C9A84C;
+  font-size: 0.7rem;
+  background: #07111F;
+  padding: 0 0.2rem;
+}
+.quote-text {
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #F0EEE8;
+  letter-spacing: 0.02em;
+}
+.quote-text em {
+  color: #C9A84C;
+  font-style: normal;
+}
+.quote-attr {
+  margin-top: 1rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  color: rgba(201,168,76,0.6);
+  text-transform: uppercase;
+}
+
+/* ── PILLARS ── */
 .pillars {
   display: flex;
   gap: 2.5rem;
@@ -181,80 +259,7 @@ footer {
   .diagram-wrap { width: 340px; height: 340px; }
   .pillars { flex-direction: column; }
   footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
-  .dama-areas { grid-template-columns: 1fr; }
-}
-
-/* ── DAMA SECTION ── */
-.dama-section {
-  max-width: 860px;
-  width: 100%;
-  margin-top: 5rem;
-  padding-top: 4rem;
-  border-top: 1px solid rgba(201,168,76,0.3);
-}
-.dama-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-.dama-title {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #F0EEE8;
-  margin-top: 0.5rem;
-}
-.dama-body {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-}
-.dama-text {
-  font-size: 1.15rem;
-  font-weight: 300;
-  line-height: 1.9;
-  color: rgba(240,238,232,0.78);
-  letter-spacing: 0.02em;
-}
-.dama-text em {
-  color: #C9A84C;
-  font-style: normal;
-  font-weight: 400;
-}
-.dama-areas {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.8rem;
-}
-.dama-area {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.9rem 1.2rem;
-  border: 1px solid rgba(201,168,76,0.2);
-  background: rgba(17,34,72,0.4);
-  transition: border-color 0.3s, background 0.3s;
-}
-.dama-area:hover {
-  border-color: rgba(201,168,76,0.6);
-  background: rgba(17,34,72,0.7);
-}
-.area-num {
-  font-family: 'Cinzel', serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.3em;
-  color: #C9A84C;
-  opacity: 0.7;
-  flex-shrink: 0;
-}
-.area-name {
-  font-family: 'Cinzel', serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #F0EEE8;
+  .quote-block { padding: 1.5rem; }
 }
 </style>
 </head>
@@ -267,64 +272,60 @@ footer {
 
 <div class="page">
   <div class="page-header">
-    <span class="page-eyebrow">Areas of Practice — 01</span>
-    <h1 class="page-title">Data Governance</h1>
+    <span class="page-eyebrow">Areas of Practice — 02</span>
+    <h1 class="page-title">Democracy &amp; Participatory Innovation</h1>
     <div class="page-rule"></div>
   </div>
 
   <div class="diagram-wrap">
-    <img src="data-governance-deco.svg" alt="Data Governance Diagram" class="diagram-img"/>
+    <img src="democracy-deco.svg" alt="Democracy & Participatory Innovation Diagram" class="diagram-img"/>
   </div>
 
-  <!-- DAMA Section -->
-  <div class="dama-section">
-    <div class="dama-header">
+  <!-- Main Content -->
+  <div class="content-section">
+    <div class="content-header">
       <span class="page-eyebrow">Framework</span>
-      <h2 class="dama-title">Data Governance</h2>
+      <h2 class="content-title">Democracy by Data</h2>
       <div class="page-rule"></div>
     </div>
-    <div class="dama-body">
-      <p class="dama-text">
-        <em>DAMA International</em> — the Data Management Association — is the global professional organisation dedicated to advancing the concepts and practices of information and data management. Founded in 1988, DAMA provides practitioners, leaders, and organisations with the standards, frameworks, and community needed to govern data as a strategic enterprise asset.
+    <div class="content-body">
+      <p class="content-text">
+        The relationship between <em>data and democracy</em> is one of the defining challenges of our era. As public institutions generate and consume more data than ever before, the question is no longer whether data shapes policy — but whether that shaping happens with <em>transparency, accountability, and genuine public participation</em>.
       </p>
-      <p class="dama-text">
-        At the heart of DAMA's contribution is the <em>DAMA-DMBOK</em> (Data Management Body of Knowledge) — a globally recognised framework that defines eleven interconnected knowledge areas, with <em>Data Governance</em> at its centre. These areas span the full data lifecycle: from architecture and modelling to quality, security, warehousing, and metadata management.
+      <p class="content-text">
+        Innokai designs deliberative systems that close the loop between citizens and institutions. Drawing on frameworks from <em>participatory budgeting</em>, <em>citizens' assemblies</em>, and <em>open data governance</em>, we help organisations build the infrastructure for meaningful civic engagement — at every scale, from neighbourhood councils to national legislatures.
       </p>
-      <p class="dama-text">
-        The DMBOK framework provides organisations with a common vocabulary and structured approach to managing data across people, processes, and technology — enabling accountability, compliance, and competitive advantage at every level.
+
+      <div class="quote-block">
+        <p class="quote-text">"Democracy is not a destination. It is a <em>continuous practice</em> — and data, when governed well, becomes its most powerful instrument."</p>
+        <p class="quote-attr">◆ &nbsp; Innokai Consulting</p>
+      </div>
+
+      <p class="content-text">
+        Participatory innovation goes beyond consultation. It embeds <em>collective intelligence</em> into the design of public services, policies, and institutions themselves. When communities are not just consulted but genuinely co-create the systems that govern them, the result is more durable, more trusted, and more effective — for everyone.
       </p>
-    </div>
-    <div class="dama-areas">
-      <div class="dama-area"><span class="area-num">01</span><span class="area-name">Data Governance</span></div>
-      <div class="dama-area"><span class="area-num">02</span><span class="area-name">Data Architecture</span></div>
-      <div class="dama-area"><span class="area-num">03</span><span class="area-name">Data Modelling & Design</span></div>
-      <div class="dama-area"><span class="area-num">04</span><span class="area-name">Data Storage & Operations</span></div>
-      <div class="dama-area"><span class="area-num">05</span><span class="area-name">Data Security</span></div>
-      <div class="dama-area"><span class="area-num">06</span><span class="area-name">Data Integration & Interoperability</span></div>
-      <div class="dama-area"><span class="area-num">07</span><span class="area-name">Documents & Content</span></div>
-      <div class="dama-area"><span class="area-num">08</span><span class="area-name">Reference & Master Data</span></div>
-      <div class="dama-area"><span class="area-num">09</span><span class="area-name">Data Warehousing & Business Intelligence</span></div>
-      <div class="dama-area"><span class="area-num">10</span><span class="area-name">Metadata Management</span></div>
-      <div class="dama-area"><span class="area-num">11</span><span class="area-name">Data Quality</span></div>
+      <p class="content-text">
+        Our approach integrates the <em>five-stage cycle</em> visible in our framework diagram: Collect, Open &amp; Share, Deliberate, Decide, and Monitor — a continuous loop that turns raw civic data into informed, legitimate, and revisable public decisions.
+      </p>
     </div>
   </div>
 
-  <!-- Pillar descriptions -->
+  <!-- Pillars -->
   <div class="pillars">
     <div class="pillar">
       <span class="pillar-icon">◈</span>
-      <div class="pillar-title">Technology</div>
-      <p class="pillar-text">The systems and tools that enable data to be captured, stored, and activated with precision.</p>
+      <div class="pillar-title">Transparency</div>
+      <p class="pillar-text">Open data architectures that make public information genuinely accessible — not just legally available.</p>
     </div>
     <div class="pillar">
       <span class="pillar-icon">◉</span>
-      <div class="pillar-title">People</div>
-      <p class="pillar-text">The stewards, owners, and custodians who define accountability across the data lifecycle.</p>
+      <div class="pillar-title">Equity &amp; Inclusion</div>
+      <p class="pillar-text">Deliberative systems designed to amplify underrepresented voices and close participation gaps across communities.</p>
     </div>
     <div class="pillar">
       <span class="pillar-icon">◇</span>
-      <div class="pillar-title">Process</div>
-      <p class="pillar-text">The policies and workflows that ensure data is governed consistently, reliably, and with integrity.</p>
+      <div class="pillar-title">Accountability</div>
+      <p class="pillar-text">Feedback loops that connect decisions back to the data and people that informed them — sustaining public trust over time.</p>
     </div>
   </div>
 </div>
