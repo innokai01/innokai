@@ -9,6 +9,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
+
 body {
   background: #07111F;
   color: #F0EEE8;
@@ -507,10 +508,10 @@ footer {
 <section class="cta-section" id="contact">
   <div class="section-header">
     <span class="section-eyebrow">Begin the Conversation</span>
-    <h2 class="section-heading">Work With Us</h2>
+    <h2 class="section-heading">Let's Work Together</h2>
     <div class="section-underline"></div>
   </div>
-  <p class="cta-sub">Strategic counsel for organisations ready to move forward — precisely.</p>
+  <p class="cta-sub">We partner with organisations ready to turn data, democracy, and innovation into lasting advantage.</p>
   <a href="mailto:hello@innokai.com" class="cta-btn"><span>Get in Touch</span></a>
 </section>
 
@@ -519,5 +520,15 @@ footer {
   <div class="footer-copy">© 2026 &nbsp;◆&nbsp; Forward Thinking</div>
 </footer>
 
+
+<script>
+  // If URL has #services, scroll to it immediately on load
+  if (window.location.hash === '#services') {
+    window.addEventListener('load', function () {
+      const el = document.getElementById('services');
+      if (el) el.scrollIntoView({ behavior: 'instant' });
+    });
+  }
+</script>
 </body>
 </html>
