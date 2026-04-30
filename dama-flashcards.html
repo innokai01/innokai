@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAMA Flashcards — Innokai Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background: #07111F;
+  color: #F0EEE8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(201,168,76,0.04) 60px, rgba(201,168,76,0.04) 61px),
+    repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(201,168,76,0.04) 60px, rgba(201,168,76,0.04) 61px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 4rem;
+  background: rgba(7,17,31,0.96);
+  border-bottom: 1px solid #C9A84C;
+  backdrop-filter: blur(8px);
+}
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: #C9A84C;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.nav-back {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-back:hover { color: #C9A84C; }
+
+/* ── MAIN ── */
+.main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 8rem 2rem 4rem;
+  gap: 1.5rem;
+}
+
+/* ── PAGE HEADER ── */
+.page-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.page-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.55em;
+  color: #C9A84C;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+.page-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #F0EEE8;
+}
+.page-rule {
+  margin: 1rem auto 0;
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #C9A84C, transparent);
+}
+
+/* ── CONTROLS ── */
+.controls {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+select {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.55rem 2rem 0.55rem 1rem;
+  border: 1px solid rgba(201,168,76,0.4);
+  background: rgba(17,34,72,0.6);
+  color: #F0EEE8;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C9A84C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+select:focus { outline: none; border-color: #C9A84C; }
+select option { background: #07111F; }
+
+.pill {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid rgba(201,168,76,0.4);
+  background: transparent;
+  color: rgba(240,238,232,0.7);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.pill:hover { border-color: #C9A84C; color: #C9A84C; }
+.pill.active { background: #C9A84C; color: #07111F; border-color: #C9A84C; }
+
+/* ── PROGRESS ── */
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.progress-bar {
+  flex: 1;
+  height: 2px;
+  background: rgba(201,168,76,0.15);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: #C9A84C;
+  transition: width 0.4s ease;
+}
+.progress-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: rgba(201,168,76,0.6);
+  min-width: 52px;
+  text-align: right;
+}
+
+/* ── CARD ── */
+.card-area {
+  perspective: 1200px;
+  cursor: pointer;
+  min-height: 280px;
+}
+.card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 280px;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(.4,0,.2,1);
+}
+.card-inner.flipped { transform: rotateY(180deg); }
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  min-height: 280px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: linear-gradient(145deg, #112248 0%, #0C1A2E 100%);
+  border: 1px solid rgba(201,168,76,0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+.card-face::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 32px; height: 32px;
+  border-bottom: 1px solid rgba(201,168,76,0.35);
+  border-right: 1px solid rgba(201,168,76,0.35);
+  pointer-events: none;
+}
+.card-face:hover { border-color: rgba(201,168,76,0.7); }
+.card-back { transform: rotateY(180deg); }
+
+.domain-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  margin-bottom: 1.2rem;
+  padding: 0.3rem 0.9rem;
+  border: 1px solid rgba(201,168,76,0.3);
+}
+.card-term {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: #F0EEE8;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.card-tap {
+  font-size: 0.9rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(240,238,232,0.35);
+  margin-top: 1.5rem;
+  letter-spacing: 0.05em;
+}
+.card-def {
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #F0EEE8;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.02em;
+}
+.card-example {
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 300;
+  color: #C9A84C;
+  line-height: 1.6;
+  padding: 0.9rem 1.2rem;
+  border-left: 2px solid rgba(201,168,76,0.4);
+  width: 100%;
+  text-align: left;
+  background: rgba(201,168,76,0.05);
+}
+
+/* ── ACTIONS ── */
+.actions {
+  display: flex;
+  gap: 0.8rem;
+}
+.btn {
+  flex: 1;
+  height: 52px;
+  border: 1px solid rgba(201,168,76,0.35);
+  background: transparent;
+  color: rgba(240,238,232,0.7);
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.btn:hover { border-color: rgba(201,168,76,0.7); color: #F0EEE8; background: rgba(201,168,76,0.05); }
+.btn:active { transform: scale(0.98); }
+.btn.got { border-color: #C9A84C; color: #C9A84C; }
+.btn.got:hover { background: rgba(201,168,76,0.12); }
+
+/* ── SCORE ROW ── */
+.score-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.8rem;
+}
+.score-card {
+  border: 1px solid rgba(201,168,76,0.2);
+  background: rgba(17,34,72,0.4);
+  padding: 1rem;
+  text-align: center;
+  position: relative;
+}
+.score-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 16px; height: 16px;
+  border-bottom: 1px solid rgba(201,168,76,0.3);
+  border-right: 1px solid rgba(201,168,76,0.3);
+}
+.score-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.35em;
+  color: rgba(201,168,76,0.55);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+.score-val {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #F0EEE8;
+}
+.score-val.green { color: #6ABFA0; }
+.score-val.amber { color: #C9A84C; }
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.35em;
+  color: rgba(201,168,76,0.35);
+  text-transform: uppercase;
+  padding: 1.5rem;
+  border-top: 1px solid rgba(201,168,76,0.2);
+  margin-top: auto;
+}
+
+@media (max-width: 480px) {
+  nav { padding: 1rem 1.5rem; }
+  .card-term { font-size: 1.5rem; }
+  .card-face { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Innokai</a>
+  <a href="data-governance.html" class="nav-back">← Data Governance</a>
+</nav>
+
+<div class="main">
+
+  <div class="page-header">
+    <span class="page-eyebrow">DAMA DMBOK · Knowledge Practice</span>
+    <h1 class="page-title">Flashcards</h1>
+    <div class="page-rule"></div>
+  </div>
+
+  <div class="controls">
+    <select id="domainFilter">
+      <option value="all">All domains</option>
+      <option value="Core Concepts">Core Concepts</option>
+      <option value="Data Quality">Data Quality</option>
+      <option value="Metadata">Metadata</option>
+      <option value="Governance">Governance</option>
+      <option value="Architecture">Architecture</option>
+      <option value="Stewardship">Stewardship</option>
+      <option value="Master Data">Master Data</option>
+    </select>
+    <span class="pill" id="shuffleBtn">↺ Shuffle</span>
+    <span class="pill" id="hardOnly">Hard terms only</span>
+  </div>
+
+  <div class="progress-row">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <span class="progress-label" id="progressLabel">0 / 0</span>
+  </div>
+
+  <div class="card-area" id="cardArea" onclick="flipCard()">
+    <div class="card-inner" id="cardInner">
+      <div class="card-face card-front">
+        <div class="domain-tag" id="frontDomain"></div>
+        <div class="card-term" id="frontTerm">—</div>
+        <div class="card-tap">tap to reveal definition</div>
+      </div>
+      <div class="card-face card-back">
+        <div class="domain-tag" id="backDomain"></div>
+        <div class="card-def" id="backDef"></div>
+        <div class="card-example" id="backExample"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn" onclick="nextCard(false)">← Skip</button>
+    <button class="btn got" onclick="nextCard(true)">Got it ◆</button>
+  </div>
+
+  <div class="score-row">
+    <div class="score-card">
+      <span class="score-label">Got it</span>
+      <div class="score-val green" id="scoreGot">0</div>
+    </div>
+    <div class="score-card">
+      <span class="score-label">Skipped</span>
+      <div class="score-val amber" id="scoreSkip">0</div>
+    </div>
+    <div class="score-card">
+      <span class="score-label">Remaining</span>
+      <div class="score-val" id="scoreLeft">0</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>DAMA DMBOK — 45 terms across 7 knowledge areas</footer>
+
+<script>
+const ALL_CARDS = [
+  { term: "Data Governance", domain: "Core Concepts", def: "The exercise of authority, control, and shared decision-making over data management assets.", example: "e.g. Who decides who can access farm yield records?" },
+  { term: "Data Stewardship", domain: "Stewardship", def: "The management and oversight of an organization's data assets to help provide business users with high-quality data.", example: "e.g. A data steward ensures field-level definitions stay consistent across systems." },
+  { term: "Data Steward", domain: "Stewardship", def: "A person responsible for managing data elements, enforcing data standards, and serving as a liaison between business and technical teams.", example: "e.g. An agronomist serving as steward for soil data definitions." },
+  { term: "Data Quality", domain: "Data Quality", def: "The degree to which data meets the requirements of its intended use in terms of accuracy, completeness, consistency, timeliness, and fitness for purpose.", example: "e.g. Yield data with missing GPS coordinates has poor completeness." },
+  { term: "Metadata", domain: "Metadata", def: "Data that describes other data — its meaning, structure, origin, and relationships.", example: "e.g. A 'digital packing slip' describing what a dataset contains and how it was collected." },
+  { term: "Business Metadata", domain: "Metadata", def: "Metadata that describes data in business terms — definitions, ownership, usage rules, and policies.", example: "e.g. 'Yield' defined as harvested bushels per acre at 15% moisture." },
+  { term: "Technical Metadata", domain: "Metadata", def: "Metadata describing the technical structure of data — formats, data types, schemas, and system locations.", example: "e.g. Column name: yield_bu_ac, type: float, unit: bu/ac." },
+  { term: "Operational Metadata", domain: "Metadata", def: "Metadata about how data is processed and used — job logs, lineage records, access frequency, and refresh schedules.", example: "e.g. 'This dataset was last updated April 2026 via API pull.'" },
+  { term: "Data Catalog", domain: "Metadata", def: "An inventory of available data assets, with metadata, to help users find, understand, and trust data.", example: "e.g. A searchable index of all datasets shared with a research cooperative." },
+  { term: "Data Lineage", domain: "Architecture", def: "A record of where data comes from, how it moves, and how it transforms over time.", example: "e.g. Tracing how raw planter data becomes a field-level seeding rate report." },
+  { term: "Data Provenance", domain: "Metadata", def: "Documentation of the origin and history of a dataset — who created it, when, and under what conditions.", example: "e.g. Rainfall data collected by a producer's weather station at field X." },
+  { term: "Data Architecture", domain: "Architecture", def: "The design of systems and structures that define how data is collected, stored, arranged, integrated, and used.", example: "e.g. Deciding whether yield data lives in a central cooperative database or stays on-farm." },
+  { term: "Data Model", domain: "Architecture", def: "An abstract representation of the data structures and relationships within a system or domain.", example: "e.g. A model showing how fields, seasons, crops, and inputs relate to each other." },
+  { term: "Master Data", domain: "Master Data", def: "Core data that is critical to business operations and shared across systems — often representing people, places, products, or organizations.", example: "e.g. A canonical list of farm operation names, each with a unique ID." },
+  { term: "Master Data Management (MDM)", domain: "Master Data", def: "The processes, tools, and governance for creating and maintaining a single, authoritative version of shared master data.", example: "e.g. Ensuring 'Corn' and 'corn' and 'CORN' are all resolved to one standard value." },
+  { term: "Reference Data", domain: "Master Data", def: "Standardized sets of values used to classify or categorize other data — like codes, lists, and taxonomies.", example: "e.g. USDA crop type codes used to tag all field-level data submissions." },
+  { term: "Data Dictionary", domain: "Metadata", def: "A document or repository that defines the meaning, format, and rules for each data element in a dataset or system.", example: "e.g. Defining what 'applied rate' means in the context of a fertilizer application record." },
+  { term: "Data Domain", domain: "Governance", def: "A subject area or functional category that groups related data assets together for governance purposes.", example: "e.g. 'Soil Health,' 'Financials,' 'Equipment' as separate domains in an ag data framework." },
+  { term: "Data Owner", domain: "Governance", def: "An individual or entity with ultimate accountability for a data asset — including decisions about access, use, and lifecycle.", example: "e.g. A producer is the data owner of their field-level agronomic records." },
+  { term: "Data Custodian", domain: "Governance", def: "A person or system responsible for the technical management and safeguarding of data assets on behalf of the owner.", example: "e.g. An ag technology company acting as custodian of a producer's precision ag data." },
+  { term: "Data Lifecycle", domain: "Governance", def: "The stages data moves through from creation or collection to archival or deletion.", example: "e.g. Yield data: collected → cleaned → analyzed → shared → archived after 7 years." },
+  { term: "Data Classification", domain: "Governance", def: "The process of organizing data into categories based on sensitivity, confidentiality, and business value.", example: "e.g. Classifying field boundary data as 'sensitive' due to competitive value." },
+  { term: "Data Policy", domain: "Governance", def: "A formal statement that defines rules, principles, or standards governing how data is managed, used, or shared.", example: "e.g. NAPDC's Agricultural Data Principles governing member data sharing." },
+  { term: "Data Standard", domain: "Governance", def: "An agreed-upon format, definition, or rule that ensures consistency in how data is represented or exchanged.", example: "e.g. ADAPT file format as a standard for sharing agronomic field data." },
+  { term: "Data Sharing Agreement", domain: "Governance", def: "A formal document that defines the terms, conditions, rights, and responsibilities of parties when data is shared.", example: "e.g. A researcher–producer agreement specifying what yield data can be used for." },
+  { term: "Data Access Control", domain: "Governance", def: "Mechanisms that restrict who can read, write, or use specific data assets.", example: "e.g. Role-based permissions so only verified researchers access disaggregated field data." },
+  { term: "Fitness for Purpose", domain: "Data Quality", def: "The degree to which data is suitable for the specific use case intended.", example: "e.g. County-level averages may not be fit for purpose in a field-specific yield model." },
+  { term: "Accuracy", domain: "Data Quality", def: "The degree to which data correctly reflects the real-world entity or event it represents.", example: "e.g. GPS coordinates that precisely locate the field boundary." },
+  { term: "Completeness", domain: "Data Quality", def: "The extent to which all required data is present and available.", example: "e.g. A dataset with yield values but missing planting dates is incomplete." },
+  { term: "Consistency", domain: "Data Quality", def: "The degree to which data values are the same across systems and over time when they should be.", example: "e.g. Corn reported as 'C' in one system and 'corn' in another is inconsistent." },
+  { term: "Timeliness", domain: "Data Quality", def: "Whether data is available when needed and current enough to be useful.", example: "e.g. Real-time soil moisture readings vs. last season's archived values." },
+  { term: "Uniqueness", domain: "Data Quality", def: "The assurance that each data entity is recorded only once, with no unwanted duplicates.", example: "e.g. Each field in a database has a single, non-duplicated record." },
+  { term: "Data Profiling", domain: "Data Quality", def: "The process of examining data to understand its structure, content, and quality.", example: "e.g. Checking a dataset for nulls, outliers, and unexpected values before analysis." },
+  { term: "Data Cleansing", domain: "Data Quality", def: "The process of detecting and correcting errors, inconsistencies, or inaccuracies in a dataset.", example: "e.g. Removing duplicate rows and standardizing crop name values." },
+  { term: "Interoperability", domain: "Architecture", def: "The ability of systems or datasets to exchange and use data without special effort.", example: "e.g. ADAPT enables interoperability between different ag software platforms." },
+  { term: "Data Integration", domain: "Architecture", def: "The process of combining data from different sources into a unified view.", example: "e.g. Merging soil test data with yield maps to build a field health index." },
+  { term: "Schema", domain: "Architecture", def: "A formal description of the structure and rules for a database or dataset.", example: "e.g. The ADAPT schema defines how agronomic field data should be formatted." },
+  { term: "Ontology", domain: "Architecture", def: "A formal representation of concepts, relationships, and rules within a knowledge domain.", example: "e.g. An agricultural ontology linking 'crop,' 'variety,' 'field,' and 'season' as concepts." },
+  { term: "Taxonomy", domain: "Architecture", def: "A hierarchical classification scheme for organizing data or concepts.", example: "e.g. Crop → Small Grain → Wheat → Winter Wheat." },
+  { term: "Data Ethics", domain: "Governance", def: "The principles and standards guiding responsible collection, use, and sharing of data to prevent harm and respect rights.", example: "e.g. NAPDC's ethical data use principles protecting producer privacy." },
+  { term: "Data Privacy", domain: "Governance", def: "The right of individuals or entities to control how their data is collected and used.", example: "e.g. Ensuring producers control who sees their individual field-level records." },
+  { term: "DAMA DMBOK", domain: "Core Concepts", def: "The Data Management Body of Knowledge — DAMA's comprehensive framework covering all major areas of data management.", example: "e.g. The DMBOK defines 11 knowledge areas from data governance to data quality." },
+  { term: "Data Management", domain: "Core Concepts", def: "The development, execution, and supervision of plans, programs, and practices that control, protect, deliver, and enhance the value of data assets.", example: "e.g. A cooperative's plan for how member data is stored, shared, and maintained." },
+  { term: "Knowledge Area", domain: "Core Concepts", def: "One of the major subject areas defined in DAMA DMBOK, each representing a distinct discipline of data management.", example: "e.g. Data Quality, Metadata Management, and Data Governance are each knowledge areas." },
+  { term: "Data Asset", domain: "Core Concepts", def: "Any data or collection of data that provides value to an organization.", example: "e.g. A producer's multi-year yield history is a high-value data asset." },
+  { term: "Data Value Chain", domain: "Core Concepts", def: "The sequence of activities through which raw data is transformed into insights and decisions that deliver value.", example: "e.g. Sensor → cleaning → analysis → agronomic recommendation → producer action." },
+];
+
+let deck = [], current = 0, flipped = false;
+let got = 0, skipped = 0;
+let hardMode = false, hardTerms = new Set();
+let domainFilter = 'all';
+
+function buildDeck() {
+  let source = ALL_CARDS.filter(c => domainFilter === 'all' || c.domain === domainFilter);
+  if (hardMode) source = source.filter(c => hardTerms.has(c.term));
+  deck = [...source].sort(() => Math.random() - 0.5);
+  current = 0; got = 0; skipped = 0; flipped = false;
+  updateCard(); updateScore();
+}
+
+function updateCard() {
+  const ci = document.getElementById('cardInner');
+  ci.classList.remove('flipped');
+  flipped = false;
+  if (current >= deck.length) {
+    document.getElementById('frontDomain').textContent = '';
+    document.getElementById('frontTerm').textContent = deck.length === 0 ? 'No cards match' : 'All done';
+    document.querySelector('.card-tap').textContent = deck.length === 0 ? 'Try a different filter.' : 'Great session — hit shuffle to go again.';
+    document.getElementById('backDef').textContent = '';
+    document.getElementById('backExample').textContent = '';
+    document.getElementById('backDomain').textContent = '';
+    updateProgress(); return;
+  }
+  const c = deck[current];
+  document.querySelector('.card-tap').textContent = 'tap to reveal definition';
+  document.getElementById('frontDomain').textContent = c.domain;
+  document.getElementById('frontTerm').textContent = c.term;
+  document.getElementById('backDomain').textContent = c.domain;
+  document.getElementById('backDef').textContent = c.def;
+  document.getElementById('backExample').textContent = c.example || '';
+  updateProgress();
+}
+
+function updateProgress() {
+  const total = deck.length;
+  const done = Math.min(current, total);
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = done + ' / ' + total;
+}
+
+function updateScore() {
+  document.getElementById('scoreGot').textContent = got;
+  document.getElementById('scoreSkip').textContent = skipped;
+  document.getElementById('scoreLeft').textContent = Math.max(0, deck.length - current);
+}
+
+function flipCard() {
+  if (current >= deck.length) return;
+  flipped = !flipped;
+  document.getElementById('cardInner').classList.toggle('flipped', flipped);
+}
+
+function nextCard(correct) {
+  if (current >= deck.length) { buildDeck(); return; }
+  if (correct) { got++; hardTerms.delete(deck[current].term); }
+  else { skipped++; hardTerms.add(deck[current].term); }
+  current++;
+  updateCard(); updateScore();
+}
+
+document.getElementById('domainFilter').addEventListener('change', function() {
+  domainFilter = this.value; buildDeck();
+});
+document.getElementById('shuffleBtn').addEventListener('click', buildDeck);
+document.getElementById('hardOnly').addEventListener('click', function() {
+  hardMode = !hardMode;
+  this.classList.toggle('active', hardMode);
+  buildDeck();
+});
+
+buildDeck();
+</script>
+</body>
+</html>
